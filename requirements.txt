@@ -1,0 +1,13 @@
+beautifulsoup4
+requests
+lxml
+PyYAML
+google-genai
+yt-dlp
+faster-whisper
+ffmpeg-python
+PyPDF2
+python-docx
+ebooklib
+beautifulsoup4
+python-dotenv
