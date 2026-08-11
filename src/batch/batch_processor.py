@@ -3,30 +3,98 @@ from pathlib import Path
 
 class BatchProcessor:
 
-    def get_sources(self, input_dir="input"):
+    def __init__(
 
-        input_path = Path(input_dir)
+        self,
+
+        input_dir="input"
+
+    ):
+
+        self.input_dir = Path(
+
+            input_dir
+
+        )
+
+    # -----------------------------------------------------
+
+    def get_sources(self):
+
+        if not self.input_dir.exists():
+
+            raise FileNotFoundError(
+
+                f"Input directory not found : "
+
+                f"{self.input_dir}"
+
+            )
 
         sources = []
 
-        for file in input_path.iterdir():
+        for file in sorted(
 
-            if file.is_file():
+            self.input_dir.iterdir()
 
-                if file.suffix.lower() == ".txt" and file.name == "urls.txt":
+        ):
 
-                    with open(file, "r", encoding="utf-8") as f:
+            if not file.is_file():
 
-                        for line in f:
+                continue
 
-                            line = line.strip().strip('"').strip("'")
+            # -----------------------------------------
+            # URL List
+            # -----------------------------------------
 
-                            if line:
+            if (
 
-                                sources.append(line)
+                file.suffix.lower() == ".txt"
 
-                else:
+                and file.name.lower() == "urls.txt"
 
-                    sources.append(str(file).strip('"').strip("'"))
+            ):
+
+                with open(
+
+                    file,
+
+                    "r",
+
+                    encoding="utf-8"
+
+                ) as f:
+
+                    for line in f:
+
+                        line = (
+
+                            line.strip()
+
+                            .strip('"')
+
+                            .strip("'")
+
+                        )
+
+                        if line:
+
+                            sources.append(
+
+                                line
+
+                            )
+
+            # -----------------------------------------
+            # Local Files
+            # -----------------------------------------
+
+            else:
+
+                sources.append(
+
+                    str(file.resolve())
+
+                )
 
         return sources

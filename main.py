@@ -1,87 +1,76 @@
-from src.pipeline import KnowledgePipeline
 from src.batch.batch_processor import BatchProcessor
+from src.queue.job_queue import JobQueue
 from src.state.state_manager import StateManager
-from src.logger.logger import PipelineLogger
+from src.engine.scheduler import Scheduler
 
-pipeline = KnowledgePipeline()
 
-batch = BatchProcessor()
+def main():
 
-state = StateManager()
+    print("\nLoading Knowledge Pipeline...\n")
 
-logger = PipelineLogger()
+    # ----------------------------------------------------
 
-sources = batch.get_sources()
+    batch = BatchProcessor()
 
-if not sources:
+    state = StateManager()
 
-    print("No files found.")
+    queue = JobQueue()
 
-    logger.log("No input sources found.")
+    scheduler = Scheduler(
 
-else:
+        state_manager=state,
 
-    total = len(sources)
+        job_queue=queue
 
-    success = 0
-    failed = 0
-    skipped = 0
+    )
 
-    logger.log("=" * 60)
-    logger.log("Pipeline Started")
+    # ----------------------------------------------------
 
-    for index, source in enumerate(sources, start=1):
+    sources = batch.get_sources()
 
-        if state.is_completed(source):
+    if not sources:
 
-            skipped += 1
+        print("No input files found.")
 
-            print(f"[SKIPPED] {source}")
+        return
 
-            logger.log(f"SKIPPED : {source}")
+    print(f"Found {len(sources)} source(s).\n")
 
-            continue
+    # ----------------------------------------------------
 
-        print("\n" + "=" * 60)
-        print(f"[{index}/{total}]")
-        print(source)
-        print("=" * 60)
+    scheduler.add_sources(
 
-        logger.log(f"START : {source}")
+        sources
 
-        try:
+    )
 
-            output = pipeline.run(source)
+    # ----------------------------------------------------
 
-            state.mark_completed(source)
+    summary = scheduler.run()
 
-            success += 1
+    # ----------------------------------------------------
 
-            logger.log(f"SUCCESS : {output}")
+    print("\n")
 
-            print(f"\n✅ Saved : {output}")
+    print("=" * 60)
 
-        except Exception as e:
+    print("PIPELINE FINISHED")
 
-            failed += 1
+    print("=" * 60)
 
-            logger.log(f"FAILED : {source}")
+    print(f"Completed : {summary['completed']}")
 
-            logger.log(str(e))
+    print(f"Failed    : {summary['failed']}")
 
-            print(f"\n❌ Failed : {e}")
+    print(f"Duplicate : {summary['duplicates']}")
 
-    logger.log("-" * 60)
-    logger.log(f"Total : {total}")
-    logger.log(f"Success : {success}")
-    logger.log(f"Failed : {failed}")
-    logger.log(f"Skipped : {skipped}")
-    logger.log("Pipeline Finished")
-    logger.log("=" * 60)
+    print(f"Total     : {summary['total']}")
 
-    print("\n========== SUMMARY ==========")
-    print(f"Total    : {total}")
-    print(f"Success  : {success}")
-    print(f"Failed   : {failed}")
-    print(f"Skipped  : {skipped}")
-    print("=============================\n")
+    print("=" * 60)
+
+    state.close()
+
+
+if __name__ == "__main__":
+
+    main()

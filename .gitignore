@@ -18,3 +18,17 @@ raw/
 .venv/
 
 metadata/
+# Runtime / local state
+state/
+state.json
+processed_urls/
+reports/
+
+# Local environment
+venv/
+
+# Temporary / local files
+*.log
+packages/
+sourceschannel.txt
+test_summarizer.py

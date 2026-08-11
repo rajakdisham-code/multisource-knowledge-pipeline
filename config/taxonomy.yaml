@@ -1,0 +1,538 @@
+# ==========================================================
+# Vidur Knowledge Taxonomy
+# Version: 1.0
+# ==========================================================
+
+domains:
+
+  Wellbeing based on IKS:
+
+    Panchakosha:
+      - panchakosha
+      - pancha kosha
+      - five sheaths
+      - annamaya
+      - pranamaya
+      - manomaya
+      - vijnanamaya
+      - anandamaya
+
+    Ayurveda Wellbeing:
+      - ayurveda
+      - holistic health
+      - wellness
+      - ayurvedic wellbeing
+
+    Tri Doshas:
+      - dosha
+      - tridosha
+      - vata
+      - pitta
+      - kapha
+
+    Tri Gunas:
+      - triguna
+      - sattva
+      - rajas
+      - tamas
+
+    Psychology of Ayurveda:
+      - ayurvedic psychology
+      - manas
+      - sattva
+      - mental constitution
+
+    Bhagavad Gita Psychology:
+      - bhagavad gita
+      - gita
+      - arjuna
+      - krishna
+      - karma yoga
+      - jnana yoga
+      - bhakti yoga
+
+    Mahabharata Psychology:
+      - mahabharata
+      - pandava
+      - kaurava
+      - draupadi
+      - yudhishthira
+
+    Ramayana Psychology:
+      - ramayana
+      - rama
+      - sita
+      - hanuman
+      - lakshmana
+
+    Upanishadic Psychology:
+      - upanishad
+      - atman
+      - brahman
+      - self realization
+
+    Vedanta:
+      - vedanta
+      - advaita
+      - dvaita
+      - non duality
+
+    Dharma:
+      - dharma
+      - righteousness
+      - duty
+
+    Karma:
+      - karma
+      - karma yoga
+      - action
+
+    Purushartha:
+      - purushartha
+      - artha
+      - kama
+      - moksha
+
+    Consciousness:
+      - consciousness
+      - awareness
+      - witness consciousness
+
+    Emotional Regulation:
+      - emotional balance
+      - emotional regulation
+      - inner peace
+
+    Spiritual Wellbeing:
+      - spirituality
+      - spiritual wellbeing
+      - devotion
+      - bhakti
+
+# ==========================================================
+
+  General Wellbeing:
+
+    Positive Psychology:
+      - gratitude
+      - happiness
+      - optimism
+      - flourishing
+
+    Modern Psychology:
+      - psychology
+      - cognitive
+      - behaviour
+      - emotion
+
+    Clinical Psychology:
+      - clinical psychology
+      - diagnosis
+      - assessment
+
+    Counselling Psychology:
+      - counselling
+      - counseling
+      - therapy
+
+    Psychiatry:
+      - psychiatry
+      - psychiatrist
+      - psychiatric
+
+    Emotional Intelligence:
+      - emotional intelligence
+      - empathy
+      - self awareness
+
+    Mental Health:
+      - mental health
+      - wellbeing
+
+    Stress Management:
+      - stress
+      - burnout
+      - anxiety
+      - pressure
+
+    Habit Formation:
+      - habit
+      - routine
+      - consistency
+
+    Behaviour Change:
+      - behaviour change
+      - behaviour modification
+
+    Sleep Health:
+      - sleep
+      - insomnia
+      - circadian rhythm
+
+    Nutrition:
+      - nutrition
+      - healthy eating
+      - balanced diet
+
+# ==========================================================
+
+  Meditation:
+
+    Mindfulness:
+      - mindfulness
+      - awareness
+      - present moment
+
+    Breath Awareness:
+      - breath awareness
+      - breathing awareness
+
+    Vipassana:
+      - vipassana
+
+    Loving Kindness:
+      - loving kindness
+      - metta
+
+    Body Scan:
+      - body scan
+
+    Mantra Meditation:
+      - mantra
+      - chanting
+
+    Yoga Nidra:
+      - yoga nidra
+
+    Relaxation:
+      - relaxation
+      - calmness
+
+# ==========================================================
+
+  Yoga:
+
+    Asana:
+      - asana
+      - yoga pose
+
+    Pranayama:
+      - pranayama
+      - breathing exercise
+      - alternate nostril
+      - kapalbhati
+      - bhastrika
+
+    Mudra:
+      - mudra
+
+    Bandha:
+      - bandha
+
+    Kriya:
+      - kriya
+
+    Surya Namaskar:
+      - surya namaskar
+      - sun salutation
+
+    Hatha Yoga:
+      - hatha yoga
+
+    Raja Yoga:
+      - raja yoga
+
+    Bhakti Yoga:
+      - bhakti yoga
+
+    Karma Yoga:
+      - karma yoga
+
+    Jnana Yoga:
+      - jnana yoga
+
+# ==========================================================
+
+  Lifestyle:
+
+    Daily Routine:
+      - daily routine
+      - routine
+
+    Morning Routine:
+      - morning routine
+
+    Evening Routine:
+      - evening routine
+
+    Healthy Habits:
+      - healthy habits
+      - lifestyle
+
+    Productivity:
+      - productivity
+
+    Time Management:
+      - time management
+
+    Self Care:
+      - self care
+
+    Digital Wellbeing:
+      - digital wellbeing
+      - digital detox
+
+    Relationships:
+      - relationship
+      - family
+      - friendship
+
+# ==========================================================
+
+  Life Guidance:
+
+    Decision Making:
+      - decision making
+
+    Career Guidance:
+      - career
+      - profession
+
+    Academic Guidance:
+      - education
+      - study
+
+    Goal Setting:
+      - goals
+      - planning
+
+    Purpose:
+      - purpose
+      - meaning
+
+    Self Awareness:
+      - self awareness
+
+    Confidence:
+      - confidence
+
+    Leadership:
+      - leadership
+
+    Communication:
+      - communication
+
+    Conflict Resolution:
+      - conflict
+
+    Personal Growth:
+      - personal growth
+      - self improvement
+
+# ==========================================================
+
+  Astrology:
+
+    Personality:
+      - birth chart
+      - natal chart
+      - personality
+
+    Psychological Astrology:
+      - psychological astrology
+
+    Career Inclination:
+      - career astrology
+
+    Relationship Compatibility:
+      - compatibility
+
+    Emotional Tendencies:
+      - emotional tendencies
+
+# ==========================================================
+
+  Ayurveda:
+
+    Constitution:
+      - prakriti
+
+    Vata:
+      - vata
+
+    Pitta:
+      - pitta
+
+    Kapha:
+      - kapha
+
+    Diet:
+      - ayurvedic diet
+
+    Herbs:
+      - herb
+      - herbal
+
+    Digestive Health:
+      - digestion
+      - agni
+
+    Preventive Healthcare:
+      - preventive care
+
+# ==========================================================
+
+  Human Development:
+
+    Child Development:
+      - child development
+
+    Adolescent Development:
+      - adolescent
+
+    Adult Development:
+      - adulthood
+
+    Healthy Aging:
+      - aging
+
+    Capacity Building:
+      - capacity building
+
+    Life Skills:
+      - life skills
+
+# ==========================================================
+
+  Education:
+
+    Learning:
+      - learning
+
+    Memory:
+      - memory
+
+    Focus:
+      - concentration
+      - focus
+
+    Critical Thinking:
+      - critical thinking
+
+    Problem Solving:
+      - problem solving
+
+    Study Skills:
+      - study skills
+
+# ==========================================================
+
+  Counselling:
+
+    Active Listening:
+      - active listening
+
+    Empathy:
+      - empathy
+
+    Therapeutic Conversation:
+      - therapeutic conversation
+
+    Coaching:
+      - coaching
+
+    Motivational Interviewing:
+      - motivational interviewing
+
+    Case Studies:
+      - case study
+
+# ==========================================================
+# Resource Types
+# ==========================================================
+
+resource_types:
+
+  Book:
+
+  Website:
+
+  YouTube:
+
+  Research Paper:
+
+  Government Report:
+
+  Policy Document:
+
+  Documentation:
+
+  Blog:
+
+  Course:
+
+  Course Transcript:
+
+  Lecture:
+
+  Podcast:
+
+  Counselling Transcript:
+
+  Conversation Transcript:
+
+  Expert Discussion:
+
+  Expert Talk:
+
+  Knowledge Distillation:
+
+  Methodology:
+
+  Standard:
+
+  Report:
+
+# ==========================================================
+# Target Audience
+# ==========================================================
+
+target_audience:
+
+  Children:
+
+  Teenagers:
+
+  College Students:
+
+  Adults:
+
+  Working Professionals:
+
+  Parents:
+
+  Teachers:
+
+  Counsellors:
+
+  Psychologists:
+
+  Researchers:
+
+  Elderly:
+
+  General Public:
+
+# ==========================================================
+# Difficulty
+# ==========================================================
+
+difficulty:
+
+  - Beginner
+
+  - Intermediate
+
+  - Advanced
+
+  - Expert
