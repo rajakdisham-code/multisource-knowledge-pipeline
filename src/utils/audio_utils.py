@@ -1,4 +1,3 @@
-import os
 import shutil
 import subprocess
 from pathlib import Path
@@ -11,10 +10,6 @@ class AudioUtils:
 
     @staticmethod
     def get_audio_duration(audio_path):
-        """
-        Returns duration of an audio file in seconds.
-        Requires ffprobe (installed with ffmpeg).
-        """
 
         command = [
             "ffprobe",
@@ -24,7 +19,7 @@ class AudioUtils:
             "format=duration",
             "-of",
             "default=noprint_wrappers=1:nokey=1",
-            audio_path,
+            str(audio_path),
         ]
 
         result = subprocess.run(
@@ -40,48 +35,97 @@ class AudioUtils:
     # ---------------------------------------------------------
 
     @staticmethod
-    def split_audio(audio_path, chunk_minutes=10):
+    def split_audio(audio_path, chunk_minutes=15):
         """
-        Splits an audio file into fixed-length chunks.
+        Split audio into Whisper-safe WAV chunks.
 
-        Returns:
-            List[str] -> paths of chunk files
+        IMPORTANT:
+        The audio is re-encoded instead of using
+        '-c copy'. This prevents MP3 chunk boundary
+        and decoding problems.
         """
 
         chunk_seconds = chunk_minutes * 60
 
         audio_path = Path(audio_path)
 
-        chunk_folder = audio_path.parent / "chunks"
+        chunk_folder = (
+            audio_path.parent
+            / f"{audio_path.stem}_chunks"
+        )
 
-        chunk_folder.mkdir(exist_ok=True)
+        # Remove old chunks from previous runs.
+        if chunk_folder.exists():
+            shutil.rmtree(chunk_folder)
 
-        output_pattern = chunk_folder / "chunk_%03d.mp3"
+        chunk_folder.mkdir(
+            parents=True,
+            exist_ok=True
+        )
+
+        output_pattern = (
+            chunk_folder
+            / "chunk_%03d.wav"
+        )
 
         command = [
             "ffmpeg",
             "-y",
+
             "-i",
             str(audio_path),
+
+            "-map",
+            "0:a:0",
+
             "-f",
             "segment",
+
             "-segment_time",
             str(chunk_seconds),
-            "-c",
-            "copy",
+
+            # Force clean, independent audio
+            "-ac",
+            "1",
+
+            "-ar",
+            "16000",
+
+            "-c:a",
+            "pcm_s16le",
+
             str(output_pattern),
         ]
+
+        print(
+            "\n[Audio] Creating clean Whisper "
+            "audio chunks..."
+        )
 
         subprocess.run(
             command,
             stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
+            text=True,
             check=True,
         )
 
         chunks = sorted(
             str(file)
-            for file in chunk_folder.glob("chunk_*.mp3")
+            for file in chunk_folder.glob(
+                "chunk_*.wav"
+            )
+        )
+
+        if not chunks:
+            raise RuntimeError(
+                f"No audio chunks created from: "
+                f"{audio_path}"
+            )
+
+        print(
+            f"[Audio] Created {len(chunks)} "
+            f"chunk(s)"
         )
 
         return chunks
@@ -97,7 +141,11 @@ class AudioUtils:
         if not chunk_paths:
             return
 
-        chunk_folder = Path(chunk_paths[0]).parent
+        chunk_folder = Path(
+            chunk_paths[0]
+        ).parent
 
         if chunk_folder.exists():
-            shutil.rmtree(chunk_folder)
+            shutil.rmtree(
+                chunk_folder
+            )

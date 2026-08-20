@@ -1,13 +1,15 @@
 from src.extractor.whisper_factory import WhisperFactory
 from src.utils.audio_utils import AudioUtils
 from src.checkpoint.checkpoint_manager import CheckpointManager
-
+from config.settings import WHISPER_CHUNK_MINUTES
 
 class ChunkedWhisperTranscriber:
 
-    def __init__(self):
+    def __init__(self, worker_id=None):
 
-        self.transcriber = WhisperFactory.get()
+        self.transcriber = WhisperFactory.get(
+            worker_id=worker_id
+        )
 
         self.checkpoint = CheckpointManager()
 
@@ -29,7 +31,7 @@ class ChunkedWhisperTranscriber:
 
             audio_path,
 
-            chunk_minutes=10
+            chunk_minutes=15
 
         )
 
@@ -63,7 +65,7 @@ class ChunkedWhisperTranscriber:
 
             full_timestamp_transcript = []
 
-        CHUNK_MINUTES = 10
+        CHUNK_MINUTES = WHISPER_CHUNK_MINUTES
 
         chunk_duration = CHUNK_MINUTES * 60
 

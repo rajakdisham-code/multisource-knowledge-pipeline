@@ -92,7 +92,7 @@ class WhisperTranscriber:
 
             condition_on_previous_text=False,
 
-            vad_filter=False
+            vad_filter=True
 
         )
 

@@ -435,7 +435,9 @@ class KnowledgePipeline:
 
             if duration <= 15 * 60:
 
-                transcript_data = WhisperFactory.get().transcribe(
+                transcript_data = WhisperFactory.get(
+                    worker_id=worker_id
+                ).transcribe(
                     audio,
                     job=job,
                     state=state
@@ -445,7 +447,9 @@ class KnowledgePipeline:
 
                 print("\nLong audio detected. Splitting into chunks...\n")
 
-                transcriber = ChunkedWhisperTranscriber()
+                transcriber = ChunkedWhisperTranscriber(
+                    worker_id=worker_id
+                )
 
                 transcript_data = transcriber.transcribe(
 
