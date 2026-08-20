@@ -322,7 +322,17 @@ class KnowledgePipeline:
         )
     # =====================================================
 
-    def _website(self, url):
+    def _website(
+
+        self,
+
+        url,
+
+        job=None,
+
+        state=None
+
+    ):
 
         downloader = WebsiteDownloader()
 
@@ -606,7 +616,17 @@ class KnowledgePipeline:
 
     # =====================================================
 
-    def _docx(self, path):
+    def _docx(
+
+        self,
+
+        path,
+
+        job=None,
+
+        state=None
+
+    ):
 
         result = DOCXExtractor().extract(path)
 
@@ -636,7 +656,17 @@ class KnowledgePipeline:
 
     # =====================================================
 
-    def _txt(self, path):
+    def _txt(
+
+        self,
+
+        path,
+
+        job=None,
+
+        state=None
+
+    ):
 
         result = TXTExtractor().extract(path)
 
