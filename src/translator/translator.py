@@ -1,5 +1,6 @@
 from pathlib import Path
 import re
+import subprocess
 
 from langdetect import detect
 
@@ -13,20 +14,106 @@ from transformers import (
 
 class TranscriptTranslator:
 
-    def __init__(self, device="cuda:1", batch_size=16):
+    def __init__(self, device=None, batch_size=16):
 
         self.model_name = (
             "facebook/nllb-200-distilled-600M"
         )
 
-        self.device = torch.device(
-            device if torch.cuda.is_available() else "cpu"
-        )
-
         self.batch_size = batch_size
 
+        # -------------------------------------------------
+        # Automatically select GPU with most free VRAM.
+        # -------------------------------------------------
+
+        if device is None and torch.cuda.is_available():
+
+            try:
+
+                result = subprocess.run(
+                    [
+                        "nvidia-smi",
+                        "--query-gpu=index,memory.free",
+                        "--format=csv,noheader,nounits"
+                    ],
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    text=True,
+                    check=True
+                )
+
+                candidates = []
+
+                for line in result.stdout.strip().splitlines():
+
+                    parts = [
+                        x.strip()
+                        for x in line.split(",")
+                    ]
+
+                    if len(parts) != 2:
+                        continue
+
+                    gpu_id = int(parts[0])
+                    free_mb = int(parts[1])
+
+                    # NLLB-200 distilled 600M needs
+                    # considerably less than Whisper large-v3,
+                    # but keep a safety margin.
+                    if free_mb >= 8192:
+
+                        candidates.append(
+                            (
+                                free_mb,
+                                gpu_id
+                            )
+                        )
+
+                if candidates:
+
+                    # Highest free VRAM first.
+                    candidates.sort(
+                        reverse=True
+                    )
+
+                    free_mb, gpu_id = candidates[0]
+
+                    device = f"cuda:{gpu_id}"
+
+                    print(
+                        f"\n[Translator] "
+                        f"Selected GPU {gpu_id} "
+                        f"({free_mb} MB free)"
+                    )
+
+                else:
+
+                    print(
+                        "\n[Translator] "
+                        "No GPU has enough free VRAM. "
+                        "Using CPU."
+                    )
+
+                    device = "cpu"
+
+            except Exception as e:
+
+                print(
+                    f"\n[Translator] "
+                    f"GPU memory detection failed: {e}"
+                )
+
+                device = "cpu"
+
+        elif device is None:
+
+            device = "cpu"
+
+        self.device = torch.device(device)
+
         print(
-            f"\nLoading translator on {self.device}...\n"
+            f"\nLoading translator on "
+            f"{self.device}...\n"
         )
 
         self.tokenizer = AutoTokenizer.from_pretrained(
